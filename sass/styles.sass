@@ -1,0 +1,406 @@
+@import _variables.sass
+@import _grid.sass
+
+/*===== MAPS ====================*/
+/*===== LISTS ===================*/
+$colors: $color-1,$color-2,$color-3,$color-4
+
+/*===== MIXINS ==================*/
+@mixin flex-row
+	display: flex
+	justify-content: center
+	align-items: center
+
+@mixin flex-column
+	@include flex-row
+	flex-direction: column	
+
+@mixin setHeightWidth($height,$width)
+	height: $height
+	width: $width	
+
+/*===== FUNCTIONS ===============*/
+/*===== EFFECTS =================*/
+html
+	scroll-behavior: smooth
+
+/*===== KEYFRAMES ===============*/
+@keyframes showFromRight
+	0% 
+		transform: translateX(100px)
+	100% 
+		transform: translateX(0)
+
+@keyframes showFromLeft
+	0%
+		transform: translateX(-100px)
+	100%
+		transform: translateX(0)	
+
+/*===== STYLES ==================*/
+body 
+	font-family: $font-2
+
+	a
+		color: nth($colors,4)
+		text-decoration: none
+
+.animated
+	opacity: 0
+	transition: all 2s
+
+.animatedRight
+	animation: showFromRight 1s	
+
+.animatedLeft
+	animation: showFromLeft	1s
+
+.btn-model
+	@include flex-column
+	@include setHeightWidth(3em,10em)
+	border-radius: 3px
+
+.btn 
+	@extend .btn-model	
+	background-color: nth($colors,1)
+	color: nth($colors,4)
+	
+	&:hover
+		background-color: nth($colors,2)
+		
+		p
+			transform: scale(1.1)
+			letter-spacing: 0.1em
+
+	a
+		@include setHeightWidth(100%,100%)	
+
+		p
+			@include flex-column
+			@include setHeightWidth(100%,100%)
+			font-size: 1.3em
+			letter-spacing: .05em
+
+.btn-go-up
+	@include flex-column
+	@include setHeightWidth(5em,5em)
+	background-color: nth($colors,1)
+	position: fixed
+	z-index: 9
+	right: 1em
+	bottom: 2em
+	border-radius: 50% 0%
+	opacity: 0
+
+	a
+		@include setHeightWidth(100%,100%)
+		@include flex-column
+
+		p
+			color: nth($colors, 4)
+			font-size: 1.5em
+
+.header
+	@include flex-column
+	position: sticky
+	top: 0
+	z-index: 3
+	background-color: nth($colors,2)
+	
+	.langs-bar
+		@include flex-row
+		justify-content: flex-end
+		@include setHeightWidth(1em,100%)
+		background-color: nth($colors,1)
+
+		a
+			@include flex-row
+			height: 80%
+			font-size: 1.1em
+			padding: 0 2em
+			&:nth-child(1)
+				border-right: 1px solid nth($colors,4)
+
+	.header-bar
+		@include flex-row
+		@include setHeightWidth(auto,100%)
+		
+		h1
+			@include flex-row
+			justify-content: flex-start
+			@include setHeightWidth(100%,50%)
+			margin-left: .5em
+			font-size: 3em
+			color: nth($colors,4)
+
+		.menu
+			@include flex-row
+			justify-content: flex-end
+			@include setHeightWidth(4em,100%)
+			position: relative
+
+			.lbl-btn-menu
+				@include flex-column
+				@include setHeightWidth(4em,4em)
+				position: relative
+				cursor: pointer
+				display: none
+
+				#spn-1 , #spn-2 , #spn-3
+					@include setHeightWidth(.09em,2.5em)
+					background: nth($colors,4)
+					position: absolute
+					content: ''
+					border-radius: 5px
+					transition: all 400ms ease
+
+				#spn-1
+					top: 30%	
+
+				#spn-2
+					top: 50%
+
+				#spn-3
+					top: 70%	
+
+			#check-btn-menu
+				display: none
+				&:checked ~ .lbl-btn-menu #spn-1
+					transform: rotate(140deg)
+					top: 50%
+
+				&:checked ~ .lbl-btn-menu #spn-2
+					display: none
+
+				&:checked ~ .lbl-btn-menu #spn-3
+					transform: rotate(-140deg)	
+					top: 50%		
+			
+			.nav-menu
+				@include setHeightWidth(100%,100%)
+
+				ul
+					@include flex-row
+					justify-content: flex-end
+					@include setHeightWidth(100%,100%)
+
+					li
+						@include flex-row
+						justify-content: flex-end
+						@include setHeightWidth(100%,100%)
+							
+						a
+							@include flex-column
+							@include setHeightWidth(100%,100%)
+							font-size: 1.5em
+							transition: all 250ms ease
+							&:hover
+								transform: scale(1.1)
+								letter-spacing: 0.1em
+
+.space-container
+	@include flex-column
+	height: 100vh
+	background-image: url(../imgs/img-space.jpg)
+	background-size: cover
+	background-position: bottom
+	/*background-attachment: fixed*/
+	img
+		@include setHeightWidth(10em,10em)
+		border-radius: 50%
+		border: 3px solid nth($colors,4)
+	
+	h2
+		color: nth($colors,4)
+		margin: 1em
+		font-size: 2.5em
+		letter-spacing: 0em
+
+.about-me-photo
+	height: 100vh
+	@include flex-row
+	img
+		height: 90%
+		border: 5px solid nth($colors,3)
+
+.about-me-info
+	@include flex-column
+	justify-content: space-between
+	height: 100vh
+
+	.about-me-resumen
+		@include flex-column
+		justify-content: space-between
+		@include setHeightWidth(50%,90%)
+		text-align: justify
+
+		h2
+			font-size: 2em
+			margin: 1em 0
+		p			
+			font-size: 1.1em
+			line-height: 1.5em	
+
+	.about-me-data
+		@include flex-column
+		justify-items: flex-start
+		@include setHeightWidth(40%,90%)
+		line-height: 2em
+		
+	.btn
+		margin-bottom: 5%
+
+.knlowledge-container
+	height: 100vh
+	background-color: nth($colors,3)
+	@include flex-column
+
+	p
+		font-size: 2em
+		margin-bottom: 1em
+		color: nth($colors,4)
+
+	.knlowledge-list-container
+		@include flex-column	
+
+.contact-container
+	@include flex-column	
+	height: 80vh
+	background-image: url(../imgs/img-space.jpg)
+	background-size: cover
+	background-position: bottom
+	position: relative
+
+	.form-container
+		@include setHeightWidth(80%,90%)
+		background-color: nth($colors,1)
+		opacity: .65
+		border-radius: 3px
+
+	.form
+		color: white
+		position: absolute
+
+/*	.div-2
+		margin: 3em 
+		height: 15em
+		width: 10em
+		border-radius: 5px
+		background-image: url(../imgs/img-space.jpg)
+		clip-path: polygon(0 0, 75% 0%, 100% 19%, 100% 100%, 25% 100%, 0 77%)*/
+.footer
+	@include flex-column
+	background-color: nth($colors,3)
+
+	.info-media-contact
+		@include flex-row
+		@include setHeightWidth(5em,20em)
+		background-color: nth($colors,4)
+		width: 100%
+
+		.icons
+			@include setHeightWidth(3em,3em)
+			margin: 2em
+			transition: all 250ms ease
+			&:hover
+				transform: scale(1.3)	
+
+	.info-developer
+		@include flex-row
+		width: 100%
+		background-color: nth($colors,1)
+		color: nth($colors,4)
+		font-size: .8em
+		letter-spacing: .2em
+		word-spacing: .2em
+
+
+/*===== @MEDIA QUERIES =============================*/
+@media all and (min-width: 600px) and (max-width: 1023px)
+	.header	
+		.header-bar		
+			.menu			
+				.lbl-btn-menu				
+					display: block
+
+				.nav-menu
+					position: absolute
+					top: 14em
+					left: -300%
+					@include setHeightWidth(100%,150%)		
+					transition: all .8s ease
+
+					ul
+						flex-direction: column
+						
+						li
+							@include setHeightWidth(100%,80%)
+							padding: .5em 
+							background-color: nth($colors,2)
+							border-top: 1px solid nth($colors,4)
+							
+							a
+								padding: .3em
+					
+	#check-btn-menu:checked ~ .nav-menu
+		left: -70%
+
+	.footer
+		.info-developer
+			@include flex-column
+			width: 100%
+			background-color: nth($colors,1)
+			color: nth($colors,4)
+			font-size: .8em
+			letter-spacing: .2em
+			word-spacing: .2em
+			text-align: center
+	
+/*----- end @media 600 a 1023px --------------------*/
+@media all and (max-width: 599px)
+	.header	
+		.header-bar		
+			.menu			
+				.lbl-btn-menu				
+					display: block
+
+				.nav-menu
+					position: absolute
+					top: 14em
+					left: -300%
+					@include setHeightWidth(100%,150%)		
+					transition: all .8s ease
+					
+					ul
+						flex-direction: column
+						
+						li
+							@include setHeightWidth(100%,100%)
+							padding: .5em 
+							background-color: nth($colors,2)
+							border-top: 1px solid nth($colors,4)
+							
+							a
+								margin: 3px solid black
+								padding: .3em
+					
+	#check-btn-menu:checked ~ .nav-menu
+		left: -70%
+
+	.about-me-container
+		@include flex-column	
+		
+	.info-developer
+		@include flex-column
+
+	.animatedRight , .animatedRight
+		animation: showFromRight 2s	
+
+	.footer
+		.info-developer
+			@include flex-column
+			text-align: center
+			
+/*----- end @media 520px ---------------------------*/
+
+

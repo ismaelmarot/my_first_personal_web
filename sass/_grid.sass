@@ -1,0 +1,31 @@
+.grid-container
+	display: grid
+	grid-template-columns: repeat(8,1fr)
+
+.header , .div-1 , .space-container , .knlowledge-container , .contact-container , .footer
+	grid-column: 1/9
+
+.about-me-photo
+	grid-column: 1/5
+
+.about-me-info
+	grid-column: 5/9	
+
+
+/*===== @MEDIA QUERIES =============================*/
+@media all and (min-width: 600px) and (max-width: 1023px)
+	.about-me-photo
+		grid-column: 1/9
+
+	.about-me-info
+		grid-column: 1/9
+
+/*----- end @media 600 a 1023px --------------------*/
+@media all and (max-width: 599px)
+	.about-me-photo
+		grid-column: 1/9
+
+	.about-me-info
+		grid-column: 1/9
+
+/*----- end @media 520px ---------------------------*/	
